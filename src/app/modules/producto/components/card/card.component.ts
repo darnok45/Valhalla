@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CrudService } from 'src/app/modules/admin/services/crud.service';
 
 @Component({
   selector: 'app-card',
@@ -9,45 +11,22 @@ import { Producto } from 'src/app/models/producto';
 export class CardComponent {
   coleccionProductos: Producto[] = [];
 
-  /* ngOnInit(): void {
-    this.coleccionProductos = [
-      {
-        idProducto: '1',
-        nombre: 'Producto A',
-        precio: 10.99,
-        descripcion: 'Este es el producto A',
-        categoria: 'Categoría 1',
-        imagen: 'https://via.placeholder.com/150',
-        alt: 'Imagen del producto A'
-      },
-      {
-        idProducto: '2',
-        nombre: 'Producto B',
-        precio: 15.99,
-        descripcion: 'Este es el producto B',
-        categoria: 'Categoría 2',
-        imagen: 'https://via.placeholder.com/150',
-        alt: 'Imagen del producto B'
-      },
-      {
-        idProducto: '3',
-        nombre: 'Producto C',
-        precio: 15.99,
-        descripcion: 'Este es el producto B',
-        categoria: 'Categoría 2',
-        imagen: 'https://via.placeholder.com/150',
-        alt: 'Imagen del producto B'
-      },
-      {
-        idProducto: '4',
-        nombre: 'Producto D',
-        precio: 15.99,
-        descripcion: 'Este es el producto B',
-        categoria: 'Categoría 2',
-        imagen: 'https://via.placeholder.com/150',
-        alt: 'Imagen del producto B'
-      }
-    ];
-  } */
+  productoSeleccionado!: Producto; // ! <- tomar valores vacíos
 
+  producto = new FormGroup({
+    nombre: new FormControl('', Validators.required),
+    precio: new FormControl(0, Validators.required),
+    descripcion: new FormControl('', Validators.required),
+    categoria: new FormControl('', Validators.required),
+    imagen: new FormControl('', Validators.required),
+    alt: new FormControl('', Validators.required)
+  })
+
+  constructor(public servicioCrud: CrudService) { }
+
+  ngOnInit(): void {
+    this.servicioCrud.obtenerProducto().subscribe(producto => {
+      this.coleccionProductos = producto;
+    }) 
+  }
 }
