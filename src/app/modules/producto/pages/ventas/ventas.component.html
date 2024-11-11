@@ -1,11 +1,11 @@
 <div class="container">
     <mat-form-field>
         <mat-label>Filtros:</mat-label>
-        <mat-select disableRipple>
+        <mat-select disableRipple [(value)]="selectedFilter" (selectionChange)="cambiarFiltro($event)" disableRipple>
         <mat-option value="todo">Todo</mat-option>
         <mat-option value="alimentacion">Alimentación</mat-option>
         <mat-option value="indumentaria">Indumentaria</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
-<app-card></app-card>
+<app-card [filter]="selectedFilter"></app-card>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from 'src/app/modules/admin/services/crud.service';
@@ -8,8 +8,9 @@ import { CrudService } from 'src/app/modules/admin/services/crud.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
-export class CardComponent {
+export class CardComponent implements OnChanges{
   coleccionProductos: Producto[] = [];
+  productosFiltrados: Producto[] = [];
 
   productoSeleccionado!: Producto; // ! <- tomar valores vacíos
 
@@ -27,6 +28,27 @@ export class CardComponent {
   ngOnInit(): void {
     this.servicioCrud.obtenerProducto().subscribe(producto => {
       this.coleccionProductos = producto;
+      this.filtrar();
     }) 
+  }
+
+  @Input() filter: string = 'todo'; // Valor por defecto es 'Todo'
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['filter']) {
+      this.filtrar();
+    }
+  }
+
+  filtrar() {
+    if (this.filter === 'todo') {
+      // Mostrar todos los productos
+      this.productosFiltrados = this.coleccionProductos;
+    } else {
+      // Filtra los productos por categoría según `filter`
+      this.productosFiltrados = this.coleccionProductos.filter(
+        producto => producto.categoria === this.filter
+      );
+    }
   }
 }
