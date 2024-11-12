@@ -1,0 +1,6 @@
+.container-carousel{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 25px;
+}

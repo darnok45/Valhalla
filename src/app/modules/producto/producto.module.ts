@@ -3,15 +3,23 @@ import { CommonModule } from '@angular/common';
 
 import { ProductoRoutingModule } from './producto-routing.module';
 import { VentasComponent } from './pages/ventas/ventas.component';
+import { CardComponent } from './components/card/card.component';
+
+// Select
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
   declarations: [
-    VentasComponent
+    VentasComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
-    ProductoRoutingModule
+    ProductoRoutingModule,
+    MatSelectModule,
+    MatFormFieldModule
   ]
 })
 export class ProductoModule { }

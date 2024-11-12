@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent {
+  selectedFilter = 'todo';
 
+  cambiarFiltro(event: any) {
+    this.selectedFilter = event.value;
+  }
 }

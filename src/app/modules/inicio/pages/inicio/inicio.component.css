@@ -1,0 +1,22 @@
+.container{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+button{
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    height: 75px;
+    margin: auto;
+    background-color: #D4AC0D;
+    color: black;
+    font-size: x-large;
+    font-weight: 400;
+    margin-top: 25px;
+}
+
+.margin-buttons{
+    margin-left: 100px;
+}
