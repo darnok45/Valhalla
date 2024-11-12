@@ -15,11 +15,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Componentes de material
 import { MatIconModule } from '@angular/material/icon';
+import { TableuserComponent } from './components/tableuser/tableuser.component';
+import { TablemaquinasComponent } from './components/tablemaquinas/tablemaquinas.component';
+import { PreciopasesComponent } from './components/preciopases/preciopases.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    TableComponent
+    TableComponent,
+    TableuserComponent,
+    TablemaquinasComponent,
+    PreciopasesComponent
   ],
   imports: [
     CommonModule,
