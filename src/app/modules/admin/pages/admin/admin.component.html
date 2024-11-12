@@ -1,9 +1,18 @@
 <div class="container">
+    <div class="buttons">
+        <button (click)="mostrarProductos()">Productos</button>
+        <button (click)="mostrarMaquinas()">Maquinas</button>
+        <button (click)="mostrarUsuarios()">Usuarios</button>
+        <button (click)="mostrarPrecioPases()">Precio Pases</button>
+    </div>
     <div class="row">
-        <h1>Admin</h1>
-
+        <h1>Administracion: </h1>
+        <hr>
         <div class="col">
-            <app-table></app-table>
+            <app-table *ngIf="producto"></app-table>
+            <app-tablemaquinas *ngIf="maquinas"></app-tablemaquinas>
+            <app-tableuser *ngIf="user"></app-tableuser>
+            <app-preciopases *ngIf="preciopases"></app-preciopases>
         </div>
     </div>
 </div>
