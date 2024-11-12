@@ -1,1 +1,181 @@
-<p>tableuser works!</p>
+<!-- TABLA DE userS -->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Contraseña</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let user of coleccionUsuarios">
+            <th scope="row">1</th>
+            <td>{{user.nombre}}</td>
+            <td>{{user.apellido}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.rol}}</td>
+            <td>{{user.password}}</td>
+
+            <!-- ACCIONES -->
+            <td>
+                <button id="btn-edit" title="Editar" type="button" class="btn btn-outline-warning" 
+                data-bs-toggle="modal" data-bs-target="#editarusuario" (click)="mostrarEditar(user)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+            <td>
+                <button id="btn-delete" title="Eliminar" type="button" class="btn btn-outline-danger" 
+                data-bs-toggle="modal" data-bs-target="#eliminarusuario" (click)="mostrarBorrar(user)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- BOTÓN DE AGREGAR NUEVOS USUARIOS -->
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#agregarusuario" disabled>
+    Agregar un nuevo usuario
+</button>
+
+<!-- MODAL PARA AGREGAR NUEVO user -->
+<div class="modal fade" id="agregarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- TÍTULO DEL MODAL -->
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese un nuevo usuario:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- CUERPO DEL MODAL-->
+            <div [formGroup]="usuario" class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el nombre del usuario:</label>
+                    <input class="form-control" type="text" formControlName="nombre"
+                        placeholder="Nombre">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el apellido del usuario:</label>
+                    <input class="form-control" type="text" formControlName="apellido"
+                        placeholder="Apellido">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el email del usuario:</label>
+                    <input class="form-control" type="text" formControlName="email"
+                        placeholder="Email">
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Selecciona el rol del usuario:</label>
+                    <select class="form-control" formControlName="rol" class="form-select">
+                        <option selected>Elija una opción</option>
+                        <option value="usuario">Usuario</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ingresa la contraseña del usuario:</label>
+                    <input class="form-control" type="text" formControlName="password"
+                        placeholder="Contraseña">
+                </div>
+            </div>
+
+            <!-- ACCIONES DEL MODAL -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success"
+                    data-bs-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PARA EDITAR UN user -->
+<div class="modal fade" *ngFor="let userEdit of coleccionUsuarios" id="editarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- TÍTULO DEL MODAL -->
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edite el siguiente user:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- CUERPO DEL MODAL-->
+            <div [formGroup]="usuario" class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el nombre del usuario:</label>
+                    <input class="form-control" type="text" formControlName="nombre"
+                        placeholder="{{userEdit.nombre}}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el/los apellidos:</label>
+                    <input class="form-control" type="text" formControlName="apellido"
+                        placeholder="{{userEdit.apellido}}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ingrese el email:</label>
+                    <input class="form-control" type="text" formControlName="email"
+                        placeholder="{{userEdit.email}}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Selecciona un rol:</label>
+                    <select class="form-control" formControlName="rol" class="form-select">
+                        <option selected disabled>Elija una opción</option>
+                        <option value="usuario">Usuario</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ingrese la contraseña:</label>
+                    <input class="form-control" type="text" formControlName="password"
+                        placeholder="{{userEdit.password}}">
+                </div>
+            </div>
+
+            <!-- ACCIONES DEL MODAL -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" (click)="editarUsuario()"
+                    data-bs-dismiss="modal">Guardar cambios</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PARA ELIMINAR UN USUARIO -->
+<div class="modal fade" *ngIf="modalVisibleUsuario" id="eliminarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- ENCABEZADO -->
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Está seguro de eliminar al usuario?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- CUERPO DE MODAL -->
+            <div class="modal-body">
+                {{usuarioSeleccionado.nombre}}
+            </div>
+
+            <!-- ACCIONES -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="borrarUsuario()">Eliminar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
