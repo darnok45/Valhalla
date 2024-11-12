@@ -8,12 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
-import { RutinaComponent } from './modules/rutina/rutina.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    RutinaComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
