@@ -31,3 +31,17 @@
 padding: 0%;
 width: 270px;
 }
+
+
+button{
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    height: 75px;
+    margin: 10px;
+    background-color: #D4AC0D;
+    color: black;
+    font-size: x-large;
+    font-weight: 400;
+    margin-top: 25px;
+}
