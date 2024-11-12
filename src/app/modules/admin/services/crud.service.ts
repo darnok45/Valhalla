@@ -3,6 +3,7 @@ import { Producto } from 'src/app/models/producto';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
+import { Preciopaselibre } from 'src/app/models/preciopaselibre';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,12 @@ export class CrudService {
 
   private usuariosCollection: AngularFirestoreCollection<Usuario>
 
+  private precioPaseLibre: AngularFirestoreCollection<Preciopaselibre>
+
   constructor(private database: AngularFirestore) {
     this.productosCollection = database.collection('producto');
-    this.usuariosCollection = database.collection('usuarios')
+    this.usuariosCollection = database.collection('usuarios');
+    this.precioPaseLibre = database.collection('preciopaselibre')
   }
 
   // CREAR productos
@@ -128,5 +132,16 @@ export class CrudService {
         reject(error)
       }
     })
+  }
+
+
+  obtenerPreciopaselibre(){
+    return this.precioPaseLibre.snapshotChanges().pipe(map(Action => Action.map(a => a.payload.doc.data())))
+  }
+
+  // CRUD -> Función para editar la tarifa
+  editarPreciopaselibre(idPaselibre: '1', nuevoPrecio: Preciopaselibre){
+    // Actualiza los datos de la tarifa en la colección con la funcion .update
+    return this.database.collection('preciopaselibre').doc(idPaselibre).update(nuevoPrecio)
   }
 }

@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TableuserComponent } from './components/tableuser/tableuser.component';
 import { TablemaquinasComponent } from './components/tablemaquinas/tablemaquinas.component';
 import { PreciopasesComponent } from './components/preciopases/preciopases.component';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PreciopasesComponent } from './components/preciopases/preciopases.compo
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    AngularFirestoreModule
   ],
   exports:[
     AdminComponent,
