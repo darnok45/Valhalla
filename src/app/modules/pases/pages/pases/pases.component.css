@@ -1,0 +1,33 @@
+.container{
+    padding-top: 10px;
+}
+
+.col{
+    justify-content: center;
+    display: flex;
+    padding: 30px;
+}
+
+.card-title,
+.card-text,
+.card-price {
+    color: white;
+}
+
+
+.card-img-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    width: 100%;
+    padding: 20px; 
+}
+
+.text-bottom {
+    text-align: left;
+}
+
+.spacer{
+padding: 0%;
+width: 270px;
+}
