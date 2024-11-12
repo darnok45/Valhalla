@@ -31,21 +31,4 @@ export class NavbarComponent {
     this.servicioRutas.navigate(['/']); // redigirimos a la raíz de la página
     this.logueado = true;
   }
-  //Funcion Para Modo Oscuro
-
-  cambiarFondo(){
-    let toggle: HTMLInputElement | null = document.getElementById('toggle') as HTMLInputElement
-    let label_toggle:HTMLElement | null = document.getElementById('label_toggle') as HTMLElement
-
-    if(toggle){
-      let checked: boolean = toggle.checked;
-      document.body.classList.toggle('dark',checked)
-
-      if(checked){
-        label_toggle!.innerHTML ='<i class="fa-solid fa-sun"></i>';
-      }else{
-        label_toggle!.innerHTML ='<i class="fa-solid fa-moon"></i>'
-      }
-    }
-  }
 }
