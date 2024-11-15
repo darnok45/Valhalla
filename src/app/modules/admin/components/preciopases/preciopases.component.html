@@ -10,7 +10,9 @@
             </button>
         </div>
         <div class="col">
-            <h2>Precio pase 3 dias:</h2>
+          <div class="div" *ngFor="let p of precioPasetresd">
+              <h2>Precio pase 3 dias: {{p.precio}}</h2>
+            </div>
             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalpasetresdias">
                 Actualizar precio
             </button>
@@ -28,18 +30,18 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar precio pase libre</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body"  [formGroup]="precio">
+        <div class="modal-body"  [formGroup]="preciopaselibre">
             <div class="div" *ngFor="let p of precioPaselibre">
                 <h3>Precio actual: {{p.precio}}</h3>
             </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Nuevo precio:</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName="precio">
+            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName="precio">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="actualizarPrecio()">Actualizar</button>
+          <button type="button" class="btn btn-primary" (click)="actualizarPrecioPaseLibre()">Actualizar</button>
         </div>
       </div>
     </div>
@@ -55,18 +57,17 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar precio pase 3 dias</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <h3>Precio actual:</h3>
-
+        <div class="modal-body" [formGroup]="preciopasetresd" *ngFor="let p of precioPasetresd">
+            <h3>Precio actual: {{p.precio}}</h3>
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Nuevo precio:</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  formControlName="precio">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-primary" (click)="actualizarPrecioTresd()">Actualizar</button>
         </div>
       </div>
     </div>
-  </div>
+</div>

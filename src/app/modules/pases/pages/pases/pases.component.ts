@@ -21,7 +21,10 @@ export class PasesComponent{
   ngOnInit(): void{
     this.servicioCrud.obtenerPreciopaselibre().subscribe( precio => {
       this.precioPaselibre = precio;
-      console.log("Datos de preciosPaselibre: ", this.precioPaselibre)
+    });
+
+    this.servicioCrud.obtenerPreciopasetresd().subscribe( precio => {
+      this.precioPasetresd = precio;
     });
   }
 }

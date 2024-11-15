@@ -14,20 +14,24 @@ export class PreciopasesComponent {
   precioPaselibre : Preciopaselibre[] = [];
   precioPasetresd : Preciopasetresd[] = [];
 
-  precio = new FormGroup({
+  preciopaselibre = new FormGroup({
     precio: new FormControl(0,Validators.required)
   })
 
+  preciopasetresd = new FormGroup({
+    precio: new FormControl(0,Validators.required)
+  })
+  
   constructor(
     // Importamos el servicio CRUD
     public servicioCrud: CrudService
   ){}
 
-  actualizarPrecio(){
-    if(this.precio.valid){
+  actualizarPrecioPaseLibre(){
+    if(this.preciopaselibre.valid){
       let nuevoPrecio: Preciopaselibre = {
         idPaselibre: '1',
-        precio: this.precio.value.precio!
+        precio: this.preciopaselibre.value.precio!
       }
 
       this.servicioCrud.editarPreciopaselibre('1',nuevoPrecio)
@@ -40,10 +44,31 @@ export class PreciopasesComponent {
     }
   }
 
+  actualizarPrecioTresd(){
+    if(this.preciopasetresd.valid){
+      let nuevoPrecio: Preciopasetresd = {
+        idPasetresd: '1',
+        precio: this.preciopasetresd.value.precio!
+      }
+
+      this.servicioCrud.editarPreciopasetresd('1',nuevoPrecio)
+      .then(precio => {
+        alert("El precio ha sido actualizado con exito")
+      })
+      .catch(error => {
+        alert("No se pudo modificar el precio \n" +error)
+      })
+    }
+  }
+
+
   ngOnInit(): void{
     this.servicioCrud.obtenerPreciopaselibre().subscribe( precio => {
       this.precioPaselibre = precio;
-      console.log("Datos de preciosPaselibre: ", this.precioPaselibre)
+    });
+
+    this.servicioCrud.obtenerPreciopasetresd().subscribe( precio => {
+      this.precioPasetresd = precio;
     });
   }
 }

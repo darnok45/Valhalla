@@ -1,5 +1,5 @@
 export interface Preciopasetresd {
-    idPasetres: string;
+    idPasetresd: string;
     precio: number;
 }
   

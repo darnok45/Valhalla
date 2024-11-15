@@ -4,22 +4,26 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { map } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
 import { Preciopaselibre } from 'src/app/models/preciopaselibre';
+import { Preciopasetresd } from 'src/app/models/preciopasetresd';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
-  // Definimos colección para los productos de la web
+  // Definimos colección para las colecciones
   private productosCollection: AngularFirestoreCollection<Producto>
 
   private usuariosCollection: AngularFirestoreCollection<Usuario>
 
   private precioPaseLibre: AngularFirestoreCollection<Preciopaselibre>
 
+  private precioPaseTresd: AngularFirestoreCollection<Preciopasetresd>
+
   constructor(private database: AngularFirestore) {
     this.productosCollection = database.collection('producto');
     this.usuariosCollection = database.collection('usuarios');
-    this.precioPaseLibre = database.collection('preciopaselibre')
+    this.precioPaseLibre = database.collection('preciopaselibre');
+    this.precioPaseTresd = database.collection('preciopasetresd')
   }
 
   // CREAR productos
@@ -135,13 +139,33 @@ export class CrudService {
   }
 
 
+  /*
+    Pase libre:
+  */
+  // CRUD -> Función para obtener el precio del pase libre
   obtenerPreciopaselibre(){
     return this.precioPaseLibre.snapshotChanges().pipe(map(Action => Action.map(a => a.payload.doc.data())))
   }
 
-  // CRUD -> Función para editar la tarifa
+  // CRUD -> Función para editar el precio del pase libre
   editarPreciopaselibre(idPaselibre: '1', nuevoPrecio: Preciopaselibre){
-    // Actualiza los datos de la tarifa en la colección con la funcion .update
+    // Actualiza los datos del precio del pase libre en la colección con la funcion .update
     return this.database.collection('preciopaselibre').doc(idPaselibre).update(nuevoPrecio)
+  }
+
+
+  /*
+    Pase tres dias:
+  */
+
+  // CRUD -> Función para obtener el precio del pase de tres dias
+  obtenerPreciopasetresd(){
+    return this.precioPaseTresd.snapshotChanges().pipe(map(Action => Action.map(a => a.payload.doc.data())))
+  }
+
+  // CRUD -> Función para editar el precio del pase de tres dias
+  editarPreciopasetresd(idPasetresd: '1', nuevoPrecio: Preciopasetresd){
+    // Actualiza los datos del precio del pase de tres dias en la colección con la funcion .update
+    return this.database.collection('preciopasetresd').doc(idPasetresd).update(nuevoPrecio)
   }
 }
