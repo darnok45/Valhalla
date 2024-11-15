@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 // Cloud Firestore -> accedemos a las colecciones
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Usuario } from 'src/app/models/usuario';
@@ -14,7 +15,10 @@ export class FirestoreService {
   */
   private usuariosCollection: AngularFirestoreCollection<Usuario>
 
-  constructor(private database: AngularFirestore) {
+  constructor(
+    private database: AngularFirestore,
+    private afAuth: AngularFireAuth
+  ) {
     /*
     usuariosCollection va a definir la nueva colección 'usuarios' que estará en nuestra 
     base de datos 
@@ -48,5 +52,20 @@ export class FirestoreService {
         reject (error);
       }
     })
+  }
+
+
+  // Funcion para eliminar el autenticador de firestore
+  async eliminarAutenticador(uid: string){
+    try{
+      // Obtiene el usuario conectado
+      const user = await this.afAuth.currentUser;
+      if(user){
+        // Si hay un usuario conectado lo elimina
+        await user.delete();
+      }
+    }catch(error){
+      throw error; // Lanza un error
+    }
   }
 }

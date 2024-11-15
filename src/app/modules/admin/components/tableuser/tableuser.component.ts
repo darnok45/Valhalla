@@ -93,6 +93,7 @@ mostrarBorrar(usuarioSeleccionado: Usuario){
 borrarUsuario(){
   this.servicioCrud.eliminarUsuario(this.usuarioSeleccionado.uid)
   .then(respuesta => {
+    this.servicioFirestore.eliminarAutenticador(this.usuarioSeleccionado.uid)
     alert("Se ha eliminado con exito.");
   })
   .catch(error => {
