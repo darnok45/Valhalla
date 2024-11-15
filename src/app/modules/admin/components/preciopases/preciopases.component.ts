@@ -40,7 +40,7 @@ export class PreciopasesComponent {
     }
   }
 
-  ngOninit(): void{
+  ngOnInit(): void{
     this.servicioCrud.obtenerPreciopaselibre().subscribe( precio => {
       this.precioPaselibre = precio;
       console.log("Datos de preciosPaselibre: ", this.precioPaselibre)

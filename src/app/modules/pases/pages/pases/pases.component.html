@@ -7,7 +7,9 @@
             <div class="card-img-overlay text-bottom">
               <h1 class="card-title">Pase libre</h1>
               <p class="card-text">Podras asistir los dias que quieras durante 1 hora</p>
-              <h3 class="card-price">Precio: 23.000$ al mes</h3>
+              <div class="div" *ngFor="let p of precioPaselibre">
+                <h3 class="card-price">Precio: {{p.precio}}$ al mes</h3>
+              </div>
             </div>
           </div>
       </div>
