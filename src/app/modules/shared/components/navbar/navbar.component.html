@@ -19,16 +19,16 @@
       <button mat-menu-item routerLink="/alimentacion">Alimentación</button>
   </mat-menu>
 
-  <button id="menuAdmin" mat-button routerLink="/admin">Admin</button>
+  <button id="menuAdmin" mat-button routerLink="/admin" *ngIf="admin">Admin</button>
 
   <span class="example-spacer"></span>
 
   <!-- Manejo del inicio (registro e inicio de sesión) y del cerrar sesión -->
   <button mat-icon-button [matMenuTriggerFor]="usuario"><mat-icon>person</mat-icon></button>
   <mat-menu #usuario="matMenu">
-      <button mat-menu-item (click)="iniciar()" *ngIf="logueado" routerLink="/registro">Registrarse</button>
-      <button mat-menu-item (click)="iniciar()" *ngIf="logueado" routerLink="/inicio-sesion">Iniciar sesión</button>
-      <button mat-menu-item (click)="cerrarSesion()" *ngIf="deslogueado">Cerrar Sesión</button>
+      <button mat-menu-item *ngIf="!logueado" routerLink="/registro">Registrarse</button>
+      <button mat-menu-item *ngIf="!logueado" routerLink="/inicio-sesion">Iniciar sesión</button>
+      <button mat-menu-item *ngIf="!deslogueado" (click)="cerrarSesion()">Cerrar Sesión</button>
   </mat-menu>
 
   <button mat-icon-button routerLink="/carrito" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">

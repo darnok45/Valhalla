@@ -60,6 +60,7 @@ async iniciarSesion() {
       tipo "Usuario" (se refiere a la interfaz Usuario de nuestros modelos)
     */
     const usuarioData = usuarioDoc.data() as Usuario;
+    console.log(usuarioData.rol)
 
     // Encripta la contraseña que el usuario envía mediante "Iniciar Sesión"
     const hashedPassword = CryptoJS.SHA256(credenciales.password).toString();
@@ -86,8 +87,12 @@ async iniciarSesion() {
           text: "¡Se pudo ingresar con éxito :)!",
           icon: "success"
         });
-
-        this.servicioRutas.navigate(['/inicio']);
+        if(usuarioData.rol == "admin"){
+          localStorage.setItem("rol", "admin")
+        }
+        localStorage.setItem("connected", "yes")
+        
+        this.servicioRutas.navigate(['/inicio']); 
       })
       .catch(err => {
         Swal.fire({

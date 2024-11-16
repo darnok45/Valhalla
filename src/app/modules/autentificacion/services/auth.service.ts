@@ -10,7 +10,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class AuthService {
   // Referenciar Auth de Firebase en el servicio y ServicioFirestore
   constructor(
-    private auth: AngularFireAuth, 
+    public auth: AngularFireAuth, 
     private servicioFirestore: AngularFirestore
   ) { }
 
@@ -29,6 +29,7 @@ export class AuthService {
   // FUNCIÓN PARA CERRAR SESIÓN
   cerrarSesion(){
     // devuelve una promesa vacía -> quita token
+    alert("Ha cerrado sesión correctamente")
     return this.auth.signOut();
   }
 
