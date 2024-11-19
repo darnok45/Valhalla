@@ -45,3 +45,18 @@ button{
     font-weight: 400;
     margin-top: 25px;
 }
+
+/* Animación para las CARDS*/
+.row:hover .col .card {
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.row:hover .col .card:not(:hover) {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.6; /* Reduce la opacidad para dar el efecto */
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
