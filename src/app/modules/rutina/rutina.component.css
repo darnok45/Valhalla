@@ -1,8 +1,10 @@
-.img{
-    width: 100px;
-    height: 100px;
+.card-img-top{
+    width: 280px;
+    height: 200px;
 }
 
-.p{
-    font-size: 100px;
+.btn2{
+    background-color: #D4AC0D;
+    color: black;
+    border-radius: 100px;
 }

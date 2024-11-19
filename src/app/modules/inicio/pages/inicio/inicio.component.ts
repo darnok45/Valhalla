@@ -8,3 +8,8 @@ import { Component } from '@angular/core';
 export class InicioComponent {
 
 }
+
+let btnForm = addEventListener("click",form)
+function form(){
+  
+}
