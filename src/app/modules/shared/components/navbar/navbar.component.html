@@ -4,7 +4,7 @@
   </button>
   <mat-menu #secciones="matMenu">
     <button mat-menu-item routerLink="/inicio">Inicio</button>
-    <button mat-menu-item [matMenuTriggerFor]="producto">Productos</button>
+    <button mat-menu-item>Productos</button>
   </mat-menu>
 
   <a routerLink="/inicio"><img src="../../../../../assets/Logo_Valhalla-removebg-preview.png" alt="" srcset=""></a>
@@ -12,12 +12,7 @@
   <button id="menuInicio" mat-button routerLink="/contacto">contacto</button>
 
   <!-- Menu desplegable: SECCIÓN DE PRODUCTOS -->
-  <button id="menuProducto" mat-button [matMenuTriggerFor]="producto">Productos</button>
-  <mat-menu #producto="matMenu">
-      <button mat-menu-item routerLink="/producto">General</button>
-      <button mat-menu-item routerLink="/indumentaria">Indumentaria</button>
-      <button mat-menu-item routerLink="/alimentacion">Alimentación</button>
-  </mat-menu>
+  <button mat-button routerLink="/tienda">Productos</button>
 
   <button id="menuAdmin" mat-button routerLink="/admin" *ngIf="admin">Admin</button>
 
