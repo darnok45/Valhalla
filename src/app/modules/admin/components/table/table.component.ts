@@ -14,13 +14,14 @@ export class TableComponent {
 
   productoSeleccionado!: Producto; // ! <- tomar valores vacíos
 
+  // Variable para controlar la visibilidad del modal
   modalVisibleProducto: boolean = false;
 
   // Definimos formulario para los productos
-  /**
-   * Atributos alfanuméricos (string) se inicializan con comillas simples
-   * Atributos numéricos (number) se inicializan con cero ('0')
-   */
+  /*
+    Atributos alfanuméricos (string) se inicializan con comillas simples
+    Atributos numéricos (number) se inicializan con cero (0)
+  */
   producto = new FormGroup({
     nombre: new FormControl('', Validators.required),
     precio: new FormControl(0, Validators.required),
@@ -30,8 +31,12 @@ export class TableComponent {
     alt: new FormControl('', Validators.required)
   })
 
-  constructor(public servicioCrud: CrudService) { }
+  // Importamos el servicio CRUD
+  constructor(
+    public servicioCrud: CrudService
+  ) { }
 
+  // Método que se ejecuta al inicializar el componente
   ngOnInit(): void {
     // subscribe -> método de notificación de cambios (observable)
     this.servicioCrud.obtenerProducto().subscribe(producto => {
@@ -39,10 +44,11 @@ export class TableComponent {
     })
   }
 
+  // Función para agregar un nuevo producto
   async agregarProducto() {
-    if (this.producto.valid) {
+    if (this.producto.valid) { // Verifica si el formulario es valido
       let nuevoProducto: Producto = {
-        idProducto: '',
+        idProducto: '', // el ID se generará automáticamnte
         nombre: this.producto.value.nombre!,
         precio: this.producto.value.precio!,
         descripcion: this.producto.value.descripcion!,
@@ -51,6 +57,7 @@ export class TableComponent {
         alt: this.producto.value.alt!
       }
 
+      // Llama al servicio crud para crear el nuevo producto
       await this.servicioCrud.crearProducto(nuevoProducto)
         .then(producto => {
           alert("Ha agregado un nuevo producto con éxito.");
@@ -74,7 +81,9 @@ export class TableComponent {
     this.productoSeleccionado = productoSeleccionado;
   }
 
+  // Fución para eliminar el producto seleccionado
   borrarProducto(){
+    // Llama al servicio crud para eliminar el producto
     this.servicioCrud.eliminarProducto(this.productoSeleccionado.idProducto)
     .then(respuesta => {
       alert("Se ha podido eliminar con éxito.");

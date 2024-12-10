@@ -17,6 +17,7 @@ coleccionUsuarios: Usuario[] = [];
 
 usuarioSeleccionado!: Usuario; // ! <- tomar valores vacíos
 
+// Variable para controlar la visibilidad del modal
 modalVisibleUsuario: boolean = false;
 
 
@@ -31,8 +32,8 @@ usuarios: Usuario = {
 
 // Definimos formulario para los usuarios
 /**
- * Atributos alfanuméricos (string) se inicializan con comillas simples
- * Atributos numéricos (number) se inicializan con cero ('0')
+  Atributos alfanuméricos (string) se inicializan con comillas simples
+  Atributos numéricos (number) se inicializan con cero ('0')
  */
 
 usuario = new FormGroup({
@@ -43,12 +44,14 @@ usuario = new FormGroup({
   password: new FormControl('', Validators.required)
 })
 
+// Importamos los servicios
 constructor(
   public servicioCrud: CrudService,
   public servicioAuth: AuthService,
   public servicioFirestore: FirestoreService
 ) { }
 
+// Método que se ejecuta al inicializar el componente
 ngOnInit(): void {
   // subscribe -> método de notificación de cambios (observable)
   this.servicioCrud.obtenerUsuario().subscribe(usuario => {
@@ -56,17 +59,18 @@ ngOnInit(): void {
   })
 }
 
+// Función para agregar un nuevo usuario
 async agregarUsuario() {
-  if (this.usuario.valid) {
+  if (this.usuario.valid) { // Verifica si el formulario es válido
     let nuevoUsuario: Usuario = {
-      uid: '',
+      uid: '', // UID generado automaticamente
       nombre: this.usuario.value.nombre!,
       apellido: this.usuario.value.apellido!,
       email: this.usuario.value.email!,
       rol: this.usuario.value.rol!,
       password: this.usuario.value.password!
     }
-
+    // Llama al servicio para crear un nuevo usuario
     await this.servicioCrud.crearUsuario(nuevoUsuario)
       .then(usuario => {
         alert("Ha agregado un nuevo usuario con éxito.");
@@ -77,6 +81,7 @@ async agregarUsuario() {
       .catch(error => {
         alert("Ha ocurrido un error al cargar un nuevo usuario.");
 
+        // Resetea el formulario y las casillas quedan vacías
         this.usuario.reset();
       })
   }
@@ -90,6 +95,7 @@ mostrarBorrar(usuarioSeleccionado: Usuario){
   this.usuarioSeleccionado = usuarioSeleccionado;
 }
 
+// Función para eliminar usuario seleccionado
 borrarUsuario(){
   this.servicioCrud.eliminarUsuario(this.usuarioSeleccionado.uid)
   .then(respuesta => {
@@ -121,8 +127,7 @@ mostrarEditar(usuarioSeleccionado: Usuario){
 // VINCULA A BOTÓN "editarUsuario" del modal de "Editar"
 editarUsuario(){
   let datos: Usuario = {
-    // Solo uId no se modifica por el usuario
-    uid: this.usuarioSeleccionado.uid,
+    uid: this.usuarioSeleccionado.uid, // Solo uId no se modifica por el usuario
     /* Los demás atributos reciben nueva información/ 
     valor desde el formulario */
     nombre: this.usuario.value.nombre!,

@@ -80,21 +80,26 @@ async iniciarSesion() {
       return;
     }
 
+    // Intenta iniciar sesión con las credenciales proporcionadas
     const res = await this.servicioAuth.iniciarSesion(credenciales.email, credenciales.password)
       .then(res => {
+        // Alerta de éxito si se cumple el inicio de sesión
         Swal.fire({
           title: "¡Buen trabajo!",
           text: "¡Se pudo ingresar con éxito :)!",
           icon: "success"
         });
+        // Guarda el rol en un almacenamiento local si el usuario es admin
         if(usuarioData.rol == "admin"){
           localStorage.setItem("rol", "admin")
         }
+        // Marca al usuario como conectado
         localStorage.setItem("connected", "yes")
-        
+        // Navega a la pagina de inicio
         this.servicioRutas.navigate(['/inicio']); 
       })
       .catch(err => {
+        // Alerta de error si hay algun problema al iniciar sesion
         Swal.fire({
           title: "¡Oh no!",
           text: "Hubo un problema al iniciar sesión :( " + err,
@@ -104,10 +109,12 @@ async iniciarSesion() {
         this.limpiarInputs();
       })
   } catch(error){
+    // Captura cualquier otro error inesperado
     this.limpiarInputs();
   }
 }
 
+// Función para limpiar los inputs
 limpiarInputs() {
   const inputs = {
     email: this.usuarios.email = '',
